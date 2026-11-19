@@ -1,0 +1,21 @@
+# code for ram_tcl
+  ...
+remove_design -all
+set search_path {../lib}
+set target_library {lsi_10k.db}
+set link_library "* lsi_10k.db"
+
+analyze -format verilog ../rtl/ram.v
+
+elaborate ram
+
+link
+
+check_design
+
+current_design  ram
+
+compile_ultra
+
+write_file -f verilog -hier -output ram_netlist.v
+...
